@@ -1,0 +1,33 @@
+class Solution:
+    #TC=O(max(len(nums), nums))
+    #SC=O(n)
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        '''
+        check the max by adding skip and array value
+        '''
+        if nums is None or len(nums)==0:
+            return 0
+        
+        maxi=max(nums)
+        dp=[0]* (maxi+1)
+        
+
+    #add the arr to it respective indices
+        for num in nums:
+            dp[num]+=num
+            
+        
+        skip=0
+        take=dp[0]
+        
+        for i in range(maxi+1):
+            temp=skip
+           # print(temp)
+            skip=max(skip, take)
+           # print(skip)
+            take=temp+dp[i]
+            print("take: ", take)
+
+        return max(skip,take)
+
+        
