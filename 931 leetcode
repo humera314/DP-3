@@ -1,0 +1,33 @@
+class Solution:
+    #TC:O(n^2)
+    #SC: O(1)
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        '''
+        goto last 2nd row and according to j check min between
+        the each row and col
+        lastly check the min from 0th row and col
+        '''
+        if matrix is None or len(matrix)==0:
+            return 0
+        n=len(matrix)
+        mini = float('inf')
+        for i in range(n-2,-1,-1):
+            for j in range(0,n,1):
+                if j==0:
+                    matrix[i][j]+=min(matrix[i+1][j],matrix[i+1][j+1])
+                elif j==n-1:
+                    matrix[i][j]+=min(matrix[i+1][j],matrix[i+1][j-1])
+                    
+                else:
+                    matrix[i][j]+=min(matrix[i+1][j-1],matrix[i+1][j], matrix[i+1][j+1])
+                    
+        
+        for j in range(n):
+            mini=min(matrix[0][j],mini)
+
+        return mini
+
+
+
+
+        
